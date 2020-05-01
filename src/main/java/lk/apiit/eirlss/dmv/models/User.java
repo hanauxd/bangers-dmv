@@ -1,5 +1,6 @@
 package lk.apiit.eirlss.dmv.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,12 +20,15 @@ public class User {
     @GenericGenerator(name = "uuid2", strategy = "uuid2")
     private String id;
     private String username;
+    @JsonIgnore
     private String password;
     @Column(name = "registration_number")
     private String registrationNumber;
+    private String role;
 
     @PrePersist
-    private void assignRegistrationNumber() {
+    private void assignValues() {
         this.registrationNumber = UUID.randomUUID().toString();
+        this.role = "ROLE_USER";
     }
 }
