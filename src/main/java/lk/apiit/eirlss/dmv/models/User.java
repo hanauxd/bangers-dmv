@@ -31,4 +31,9 @@ public class User {
         this.registrationNumber = UUID.randomUUID().toString();
         this.role = "ROLE_USER";
     }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
