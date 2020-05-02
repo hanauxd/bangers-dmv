@@ -1,5 +1,6 @@
 HELP.md
 data/
+csv-storage/
 *.sql
 target/
 !.mvn/wrapper/maven-wrapper.jar
