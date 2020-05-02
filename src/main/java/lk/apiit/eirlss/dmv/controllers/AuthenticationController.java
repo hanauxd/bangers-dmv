@@ -1,7 +1,7 @@
 package lk.apiit.eirlss.dmv.controllers;
 
 import lk.apiit.eirlss.dmv.dto.AuthenticationResponse;
-import lk.apiit.eirlss.dmv.models.User;
+import lk.apiit.eirlss.dmv.dto.UserDTO;
 import lk.apiit.eirlss.dmv.security.JwtUtil;
 import lk.apiit.eirlss.dmv.services.UserDetailsServiceImpl;
 import lk.apiit.eirlss.dmv.services.UserService;
@@ -39,12 +39,12 @@ public class AuthenticationController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody User user) {
-        return new ResponseEntity<>(userService.registerUser(user), HttpStatus.CREATED);
+    public ResponseEntity<?> register(@RequestBody UserDTO dto) {
+        return new ResponseEntity<>(userService.registerUser(dto.getUser()), HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody User user) {
+    public ResponseEntity<?> login(@RequestBody UserDTO user) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword()));
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         String jwt = jwtUtil.generateToken(userDetails);
